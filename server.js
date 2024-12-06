@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
 
 const app = express();
 
@@ -8,6 +9,18 @@ app.use(
   cors({
     origin: "https://geeks-for-geeks-react-projects.vercel.app",
     methods: "GET, POST",
+  })
+);
+
+// Configurar Helmet para CSP
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://vercel.live"],
+      },
+    },
   })
 );
 
