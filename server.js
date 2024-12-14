@@ -22,15 +22,20 @@ app.use(
       directives: {
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", "https://vercel.live"],
-        scriptSrcElem: ["'self'", "https://vercel.live"], // Permitir scripts en elementos
+        scriptSrcElem: ["'self'", "https://vercel.live"], // Allow scripts in <script> elements
         styleSrc: ["'self'"],
         imgSrc: ["'self'", "https://ip-api.com"],
+        // Add other directives if necessary
       },
     },
   })
 );
 
 const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the IP Finder Backend");
+});
 
 app.get("/ip", async (req, res) => {
   const ip = req.query.ip || "";
