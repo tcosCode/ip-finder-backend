@@ -32,7 +32,7 @@ app.use(
 const PORT = process.env.PORT || 3000;
 
 app.get("/ip", async (req, res) => {
-  const ip = req.query.ip || ""; // Lee la IP de la query string
+  const ip = req.query.ip || "";
   const isValidIp = /^(\d{1,3}\.){3}\d{1,3}$/.test(ip); // Validación básica de IP
 
   const endpoint = isValidIp
@@ -47,7 +47,7 @@ app.get("/ip", async (req, res) => {
     const data = await response.json();
     res.status(200).json(data);
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching IP data:", error.message);
     res
       .status(500)
       .json({ error: "Error fetching IP data", details: error.message });
