@@ -14,6 +14,21 @@ app.use(
   })
 );
 
+// Helmet
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://vercel.live"],
+        scriptSrcElem: ["'self'", "https://vercel.live"], // Permitir scripts en elementos
+        styleSrc: ["'self'"],
+        imgSrc: ["'self'", "https://ip-api.com"],
+      },
+    },
+  })
+);
+
 const PORT = process.env.PORT || 3000;
 
 app.get("/ip", async (req, res) => {
